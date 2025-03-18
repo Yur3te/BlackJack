@@ -13,6 +13,7 @@ class Deck {
         ~Deck();
         void printDeck();
         void shuffle();
+        void reset();
         Card* deal();
     private:
         vector<Card*> deck;

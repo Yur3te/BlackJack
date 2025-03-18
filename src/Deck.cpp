@@ -25,6 +25,11 @@ void Deck::shuffle() {
     std::shuffle(deck.begin(), deck.end(), g); 
 }
 
+void Deck::reset() {
+    this->~Deck();
+    new (this) Deck();
+}
+
 Card* Deck::deal() {
     if (deck.empty()) {
         cout << "Deck is empty!" << endl;
