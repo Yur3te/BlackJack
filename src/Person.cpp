@@ -35,6 +35,10 @@ bool Person::isBusted() const {
     return getHandValue() > 21;
 }
 
+void Person::clearHand() {
+    hand.clear();
+}
+
 Person::~Person() {
     for (Card* card : hand) {
         delete card;
