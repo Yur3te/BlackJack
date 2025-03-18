@@ -34,6 +34,11 @@ void Game::playRound() {
     }
     dealInitialCards();
     checkBlackjack();
+    // Could make checkBlackjack() a bool function instead of void for more clear code for breaking game loop after blackjack is scored, but I'm too lazy to change that, maybe later ;>
+    if (player.getHandValue() == 21 || dealer.getHandValue() == 21) {
+        determineWinner();
+        return;
+    }
     if (!playerTurn()) {
         determineWinner();
         return;
@@ -98,7 +103,6 @@ bool Game::playerTurn() {
     player.playTurn(deck);
     if (player.getHandValue() > 21) {
         cout << "You busted! You lose!" << endl;
-        chips.removeChips(bet);
         return false;
     }
     return true;
@@ -117,15 +121,14 @@ void Game::determineWinner() {
     cout << "Dealer score: " << dealerScore << endl;
 
     if (playerScore > 21) {
-        cout << "You busted! You lose!" << endl;
         chips.removeChips(bet);
     } else if (dealerScore > 21 || playerScore > dealerScore) {
-        cout << "You win!" << endl;
+        cout << "You win! You won " << bet*2 << " chips." << endl;
         chips.addChips(bet);
     } else if (playerScore == dealerScore) {
         cout << "Push!" << endl;
     } else {
-        cout << "Dealer wins!" << endl;
+        cout << "Dealer wins! You lose " << bet << " chips." << endl;
         chips.removeChips(bet);
     }
 }
