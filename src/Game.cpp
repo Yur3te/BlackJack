@@ -69,7 +69,9 @@ bool Game::handleBet() {
         cout << "Not enough chips! You only have " << chips.getChips() << " chips." << endl;
         return false;
     }
-
+    cout<<"You bet: "<<bet<<endl;
+    chips.removeChips(bet);
+    cout<<"You have: "<<chips.getChips()<<" chips left."<<endl;
     return true;
 
 }
@@ -92,7 +94,8 @@ void Game::checkBlackjack() {
             cout << "Push! Both have blackjack!" << endl;
         } else if (player.getHandValue() == 21) {
             cout << "Blackjack! You win 1.5x your bet!" << endl;
-            bet = static_cast<int>(bet * 1.5);
+            bet = static_cast<int>(bet * 1.25);
+            // 2.5x, on bj,  it goes now 1.5x then 2x, so 3x not 2.5x, ig 1.25 works XDD
         } else {
             cout << "Dealer has blackjack! You lose!" << endl;
         }
@@ -100,7 +103,7 @@ void Game::checkBlackjack() {
 }
 
 bool Game::playerTurn() {
-    player.playTurn(deck);
+    player.playTurn(deck, bet, chips);
     if (player.getHandValue() > 21) {
         cout << "You busted! You lose!" << endl;
         return false;
@@ -116,19 +119,19 @@ void Game::determineWinner() {
     int playerScore = player.getHandValue();
     int dealerScore = dealer.getHandValue();
 
-    cout << "Dealer's hand: " << endl;
-    dealer.printHand();
-    cout << "Dealer score: " << dealerScore << endl;
+    // cout << "Dealer's hand: " << endl;
+    // dealer.printHand();
+    // cout << "Dealer score: " << dealerScore << endl;
 
     if (playerScore > 21) {
-        chips.removeChips(bet);
+        // chips.removeChips(bet);
     } else if (dealerScore > 21 || playerScore > dealerScore) {
         cout << "You win! You won " << bet*2 << " chips." << endl;
-        chips.addChips(bet);
+        chips.addChips(bet*2);
     } else if (playerScore == dealerScore) {
         cout << "Push!" << endl;
+        chips.addChips(bet);
     } else {
-        cout << "Dealer wins! You lose " << bet << " chips." << endl;
-        chips.removeChips(bet);
+        cout << "Dealer wins! You lost " << bet << " chips." << endl;
     }
 }
