@@ -1,7 +1,7 @@
 #ifndef DEALER_H
 #define DEALER_H
 
-#include "person.h"
+#include "Person.h"
 #include "Deck.h"
 
 class Dealer : public Person {
