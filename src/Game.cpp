@@ -1,6 +1,7 @@
 #include "../include/Game.h"
 
 #include <iostream>
+#include <limits>
 
 using namespace std;
 
@@ -58,16 +59,31 @@ void Game::endRound() {
 }
 
 bool Game::handleBet() {
-    cout << "Enter your bet: ";
-    cin >> bet;
-    if (bet <= 0) {
-        cout << "Bet must be greater than 0!" << endl;
-        return false;
-    }
+    while (true) {
+        try {
+            cout << "Enter your bet: ";
+            cin >> bet;
+            if (cin.fail()) {
+                throw runtime_error("Invalid input! Please enter a valid number.");
+            }
 
-    if (bet > chips.getChips()) {
-        cout << "Not enough chips! You only have " << chips.getChips() << " chips." << endl;
-        return false;
+            if (bet <= 0) {
+                cout << "Bet must be greater than 0!" << endl;
+                return false;
+            }
+    
+            if (bet > chips.getChips()) {
+                cout << "Not enough chips! You only have " << chips.getChips() << " chips." << endl;
+                return false;
+            }
+            break;
+            
+        } catch (const runtime_error& e) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid bet!" << endl;
+            return false;
+        }
     }
     cout<<"You bet: "<<bet<<endl;
     chips.removeChips(bet);
