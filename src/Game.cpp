@@ -119,10 +119,26 @@ void Game::checkBlackjack() {
 }
 
 bool Game::playerTurn() {
-    player.playTurn(deck, bet, chips);
-    if (player.getHandValue() > 21) {
-        cout << "You busted! You lose!" << endl;
-        return false;
+    int i = 0;
+    while (i < player.hands.size()) { 
+        player.currentHandIndex = i;
+
+        if(player.hands.size() > 1){
+            cout << "Hand #" << (i + 1) << ":" << endl;
+            player.getCurrentHand().printHand();
+            cout << "Hand value: " << player.getCurrentHand().getHandValue() << endl;
+        }
+        player.playTurn(deck, bet, chips); 
+
+        cout << "Final state of Hand #" << (i + 1) << ":" << endl;
+        player.getCurrentHand().printHand();
+        cout << "Hand value: " << player.getCurrentHand().getHandValue() << endl;
+
+        if (player.getCurrentHand().isBusted()) {
+            cout << "Hand #" << (i + 1) << " busted!" << endl;
+        }
+
+        i++; 
     }
     return true;
 }
@@ -132,22 +148,25 @@ void Game::dealerTurn() {
 }
 
 void Game::determineWinner() {
-    int playerScore = player.getHandValue();
     int dealerScore = dealer.getHandValue();
 
     // cout << "Dealer's hand: " << endl;
     // dealer.printHand();
     // cout << "Dealer score: " << dealerScore << endl;
-
-    if (playerScore > 21) {
-        // chips.removeChips(bet);
-    } else if (dealerScore > 21 || playerScore > dealerScore) {
-        cout << "You win! You won " << bet*2 << " chips." << endl;
-        chips.addChips(bet*2);
-    } else if (playerScore == dealerScore) {
-        cout << "Push!" << endl;
-        chips.addChips(bet);
-    } else {
-        cout << "Dealer wins! You lost " << bet << " chips." << endl;
+    
+    for (int i = 0; i < player.hands.size(); i++) {
+        int playerScore = player.hands[i].getHandValue();
+        cout << "Result for Hand #" << (i + 1) << ":" << endl;
+        if (playerScore > 21) {
+            // chips.removeChips(bet);
+        } else if (dealerScore > 21 || playerScore > dealerScore) {
+            cout << "You win! You won " << bet*2 << " chips." << endl;
+            chips.addChips(bet*2);
+        } else if (playerScore == dealerScore) {
+            cout << "Push!" << endl;
+            chips.addChips(bet);
+        } else {
+            cout << "Dealer wins! You lost " << bet << " chips." << endl;
+        }
     }
 }

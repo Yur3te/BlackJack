@@ -9,7 +9,10 @@ class Player : public Person {
     public:
         void playTurn(Deck& deck, int& bet, Chips& chips);
         bool doubleDown(Deck& deck, int& bet, Chips& chips);
-        // bool Split() const;
+
+        bool split(Deck& deck, int& bet, Chips& chips);
+        Hand& getCurrentHand();
+
 };
 
-#endif // PLAYER_H
+#endif // PLAYER_HS
