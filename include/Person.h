@@ -3,9 +3,13 @@
 
 #include <vector>
 #include "Card.h"
+#include "Hand.h"
 
 class Person {
     public:
+        
+        int currentHandIndex = 0;
+        
         Person();
         virtual ~Person();
         void addCard(Card* card);
@@ -13,8 +17,12 @@ class Person {
         int getHandValue() const;
         bool isBusted() const;
         void clearHand();
-    protected:
-        vector<Card*> hand;
+        
+        const Hand& getFirstHand() const;
+        vector<Hand> hands;
+        // TODO: Refactor hands to be private and add proper access methods
+    // private:
+    //     vector<Hand> hands;
 };
 
 

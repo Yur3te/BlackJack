@@ -3,44 +3,39 @@
 #include <iostream>
 
 
-Person::Person() {}
+Person::Person() {
+    hands.emplace_back();
+}
 
 void Person::addCard(Card* card) {
-    hand.push_back(card);
+    if (hands.empty()) {
+        hands.emplace_back();
+    }
+    hands[currentHandIndex].addCard(card);
 }
 
 void Person::printHand() const {
-    for (Card* card : hand) {
-        card->printCard();
-    }
+    hands[currentHandIndex].printHand();
 }
 
 int Person::getHandValue() const {
-    int sum = 0;
-    int numAces = 0;
-    for (Card* card : hand) {
-        sum += card->getValue();
-        if (card->getValue() == 11) {
-            numAces++;
-        }
-    }
-    while (sum > 21 && numAces > 0) {
-        sum -= 10;
-        numAces--;
-    }
-    return sum;
+    return hands[currentHandIndex].getHandValue();
 }
 
 bool Person::isBusted() const {
-    return getHandValue() > 21;
+    return hands[currentHandIndex].isBusted();
 }
 
 void Person::clearHand() {
-    hand.clear();
+    hands[currentHandIndex].clearHand();
+}
+
+const Hand& Person::getFirstHand() const {
+    return hands[0];
 }
 
 Person::~Person() {
-    for (Card* card : hand) {
-        delete card;
+    for (Hand& hand : hands) {
+        hand.clearHand();
     }
 }
