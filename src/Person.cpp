@@ -27,8 +27,14 @@ bool Person::isBusted() const {
 }
 
 void Person::clearHand() {
-    hands[currentHandIndex].clearHand();
+    for (auto& hand : hands) {
+        hand.clearHand();
+    }
+    hands.clear();
+    hands.emplace_back();
+    currentHandIndex = 0;
 }
+
 
 const Hand& Person::getFirstHand() const {
     return hands[0];
