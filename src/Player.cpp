@@ -29,7 +29,6 @@ void Player::playTurn(Deck& deck, int& bet, Chips& chips) {
             if (!split(deck, bet, chips)) { 
                 continue;
             }
-            break;  
         } else if (choice == 'l') {
             cout << "Current hand: " << endl;
             printHand();
