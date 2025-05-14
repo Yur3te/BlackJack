@@ -17,6 +17,7 @@ class Card {
         int getValue() const;
         void printCard() const;
         string toString() const;
+        string getImageName() const;
     private:
         Rank rank;
         Suit suit;

@@ -23,3 +23,12 @@ string Card::toString() const {
 void Card::printCard() const {
     std::cout << toString() << std::endl;
 }
+
+string Card::getImageName() const {
+    const std::string suits[] = {"hearts", "diamonds", "clubs", "spades"};
+    const std::string ranks[] = {
+        "", "ace", "2", "3", "4", "5", "6", "7", "8", "9", "10", "jack", "queen", "king", "ace"
+    };
+    return ranks[static_cast<int>(rank)] + "_of_" + suits[static_cast<int>(suit)] + ".png";
+}
+
