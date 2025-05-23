@@ -43,6 +43,7 @@ void MainWindow::displayCard(Card* card) {
     // cardLabel->setPixmap(QPixmap(imagePath).scaled(100, 140));
     // ui->cardsLayout->addWidget(cardLabel);
 
+
     QString imagePath = QCoreApplication::applicationDirPath() + "/assets/cards/" + QString::fromStdString(card->getImageName());
     QPixmap pixmap(imagePath);
     if (pixmap.isNull()) {
