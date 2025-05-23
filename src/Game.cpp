@@ -170,3 +170,22 @@ void Game::determineWinner() {
         }
     }
 }
+
+Card* Game::playerHit() {
+    return player.hit(deck);
+}
+
+bool Game::playerStand() {
+    return player.stand();
+}
+
+bool Game::playerDoubleDown() {
+    return player.doubleDown(deck, bet, chips);
+}
+bool Game::playerSplit() {
+    return player.split(deck, bet, chips);
+}
+
+bool Game::isPlayerBusted() {
+    return player.isBusted();
+}

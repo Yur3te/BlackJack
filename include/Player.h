@@ -8,9 +8,11 @@
 class Player : public Person {
     public:
         void playTurn(Deck& deck, int& bet, Chips& chips);
-        bool doubleDown(Deck& deck, int& bet, Chips& chips);
 
+        bool doubleDown(Deck& deck, int& bet, Chips& chips);
+        Card* hit(Deck& deck);
         bool split(Deck& deck, int& bet, Chips& chips);
+        bool stand();
         Hand& getCurrentHand();
 
 };

@@ -11,6 +11,12 @@ public:
     Game();
     void play();
     void endGame();
+
+    Card* playerHit();
+    bool playerStand(); 
+    bool playerDoubleDown();
+    bool playerSplit();
+    bool isPlayerBusted();
 private:
     Deck deck;
     Player player;

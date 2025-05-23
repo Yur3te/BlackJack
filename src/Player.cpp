@@ -58,6 +58,22 @@ bool Player::doubleDown(Deck& deck, int& bet, Chips& chips) {
     return true;
 }
 
+Card* Player::hit(Deck& deck) {
+    Card* card = deck.deal();  
+    addCard(card);             
+    return card;               
+}
+
+bool Player::stand() {
+    return true;
+}
+
+// bool Player::stand() {
+//     return true;
+// }
+
+
+
 bool Player::split(Deck& deck, int& bet, Chips& chips) {
     if(!getCurrentHand().canSplit()) {
         cout << "You can't split this hand silly, you need two cards with the same value ;>" << endl;
