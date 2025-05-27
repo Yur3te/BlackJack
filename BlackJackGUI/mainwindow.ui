@@ -6,73 +6,134 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1168</width>
+    <height>775</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="buttonHit">
+   <widget class="QWidget" name="dealerCardsWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>140</x>
-      <y>360</y>
-      <width>88</width>
-      <height>26</height>
+      <x>370</x>
+      <y>70</y>
+      <width>331</width>
+      <height>171</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout"/>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>40</y>
+      <width>49</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Hit</string>
+     <string>Dealer</string>
     </property>
+   </widget>
+   <widget class="QWidget" name="playerCardsWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>370</y>
+      <width>521</width>
+      <height>210</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_3"/>
+   </widget>
+   <widget class="QWidget" name="gameButtonsWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>400</x>
+      <y>610</y>
+      <width>321</width>
+      <height>42</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QPushButton" name="buttonHit">
+       <property name="text">
+        <string>Hit</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonStand">
+       <property name="text">
+        <string>Stand</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonDouble">
+       <property name="text">
+        <string>Double</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonSplit">
+       <property name="text">
+        <string>Split</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="betLayout" native="true">
+    <property name="geometry">
+     <rect>
+      <x>880</x>
+      <y>510</y>
+      <width>109</width>
+      <height>116</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="text">
+        <string>Your Chips:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="chipsLabel">
+       <property name="text">
+        <string>0</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="enterChips"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonBet">
+       <property name="text">
+        <string>Bet!</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
    <widget class="QTextEdit" name="textOutput">
     <property name="geometry">
      <rect>
-      <x>180</x>
-      <y>230</y>
-      <width>104</width>
-      <height>70</height>
+      <x>20</x>
+      <y>50</y>
+      <width>221</width>
+      <height>331</height>
      </rect>
     </property>
-   </widget>
-   <widget class="QPushButton" name="buttonStand">
-    <property name="geometry">
-     <rect>
-      <x>250</x>
-      <y>360</y>
-      <width>88</width>
-      <height>26</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Stand</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="cardLabel">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>170</y>
-      <width>66</width>
-      <height>18</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TextLabel</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="horizontalLayoutWidget">
-    <property name="geometry">
-     <rect>
-      <x>330</x>
-      <y>80</y>
-      <width>271</width>
-      <height>191</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="cardsLayout"/>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -80,8 +141,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>800</width>
-     <height>23</height>
+     <width>1168</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
