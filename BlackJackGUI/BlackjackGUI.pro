@@ -41,7 +41,11 @@ CONFIG(debug, debug|release) {
 }
 
 ASSETS_DIR = $$PWD/assets
-BUILD_ASSETS_DIR = $$OUT_PWD/$$BUILD_DIR/assets
+
+BUILD_ASSETS_DIR = $$OUT_PWD/assets
+
+#coś się rozwala między linuxem a windowsem, na górze do linuxa, na dole do windowsa, ponoć nie powinno rozwalić buildu na windowsie, ale zostawiam
+#BUILD_ASSETS_DIR = $$OUT_PWD/$$BUILD_DIR/assets
 
 unix: {
     copy_assets.commands = cp -r $$ASSETS_DIR $$BUILD_ASSETS_DIR
