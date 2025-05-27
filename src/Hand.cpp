@@ -46,6 +46,11 @@ void Hand::printCard(int index) const {
         }
     }
 
+const vector<Card*>& Hand::getCards() const {
+    return cards;
+}
+
+
 bool Hand::canSplit() const{
         return (cards.size() == 2 &&cards[0]->getValue() == cards[1]->getValue());
     }

@@ -12,6 +12,8 @@ class Hand {
         ~Hand();
         void addCard(Card* card);
         void printHand() const;
+        const vector<Card*>& getCards() const;
+
         int getHandValue() const;
         bool isBusted() const;
         void clearHand();
@@ -20,7 +22,6 @@ class Hand {
         Card* removeLastCard();
 
         int getCardsSize() const;
-
 
     private:
         vector<Card*> cards;
