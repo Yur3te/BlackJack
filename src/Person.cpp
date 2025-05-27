@@ -36,9 +36,15 @@ void Person::clearHand() {
 }
 
 
+const std::vector<Hand>& Person::getHands() const {
+    return hands;
+}
+
+
 const Hand& Person::getFirstHand() const {
     return hands[0];
 }
+
 
 Person::~Person() {
     for (Hand& hand : hands) {

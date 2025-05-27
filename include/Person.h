@@ -18,7 +18,10 @@ class Person {
         bool isBusted() const;
         void clearHand();
         
+        const std::vector<Hand>& getHands() const;
         const Hand& getFirstHand() const;
+        const std::vector<Card*>& getCards() const;
+
         vector<Hand> hands;
         // TODO: Refactor hands to be private and add proper access methods
     // private:
