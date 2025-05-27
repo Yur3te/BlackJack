@@ -19,13 +19,18 @@ public:
 private slots:
     void onHitClicked();
     void onStandClicked();
-    void displayCard(Card* card);
-    void displayPlayerHand();
-    void displayDealerHand();
+    void onBetClicked();
+    void displayCard(Card* card, QLayout* targetLayout);
+    void updateChipsDisplay();
+    void updateHandsDisplay();
+    void displayRoundResult();
+    
+    // void displayPlayerHand(const std::vector<Card>& cards);
+    // void displayDealerHand(const std::vector<Card>& cards, bool revealAll);
+
 
 private:
     Ui::MainWindow *ui;
     Game* game;
-    Deck* deck;
 };
 #endif // MAINWINDOW_H
