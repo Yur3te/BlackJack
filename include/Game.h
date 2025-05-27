@@ -1,6 +1,8 @@
 #ifndef GAME_H
 #define GAME_H
 
+#include <QMainWindow>
+
 #include "Deck.h"
 #include "Player.h"
 #include "Dealer.h"
@@ -17,21 +19,31 @@ public:
     bool playerDoubleDown();
     bool playerSplit();
     bool isPlayerBusted();
+
+    void dealerPlayTurn();
+
+    void placeBet(int bet);
+    void dealInitialCards();
+    int getChipsAmount() const;
+
+    QString determineOutcome();
+
+    void endRound();
+
+    Player& getPlayer();
+    Dealer& getDealer();
 private:
     Deck deck;
     Player player;
     Dealer dealer;
     Chips chips;
-    int bet;
-    bool handleBet();
-    void dealInitialCards();
+    int currentBet;
     void checkBlackjack();
     bool playerTurn();
     void dealerTurn();
     void determineWinner();
 
-    void playRound();
-    void endRound();
+    // void playRound();
 };
 
 #endif // GAME_H
