@@ -1,6 +1,7 @@
 #include "../include/Chips.h"
 
 #include <fstream>
+#include <QCoreApplication>
 
 using namespace std;
 
@@ -28,13 +29,15 @@ void Chips::printChips() const {
 }
 
 void Chips::saveChips() const {
-    ofstream file("chips.txt");
+    QString path = QCoreApplication::applicationDirPath() + "/chips.txt";
+    ofstream file(path.toStdString());
     file << chips;
     file.close();
 }
 
 void Chips::loadChips() {
-    ifstream file("chips.txt");
+    QString path = QCoreApplication::applicationDirPath() + "/chips.txt";
+    ifstream file(path.toStdString());
     file >> chips;
     file.close();
 }
