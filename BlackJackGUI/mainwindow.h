@@ -20,8 +20,13 @@ private slots:
     void onHitClicked();
     void onStandClicked();
     void onBetClicked();
-    void displayCard(Card* card, QLayout* targetLayout);
+    void onDoubleDownClicked();
+
+    
+    void displayCard(Card* card, QWidget* targetWidget, int cardIndex, bool horizontal);
+    void displayBackCard(QWidget* targetWidget, int cardIndex, bool horizontal);
     void updateChipsDisplay();
+    void displayHandValue(const Hand& hand);
     void updateHandsDisplay();
     void displayRoundResult();
     
