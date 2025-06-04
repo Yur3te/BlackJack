@@ -17,13 +17,12 @@
    <widget class="QWidget" name="dealerCardsWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>370</x>
+      <x>320</x>
       <y>70</y>
-      <width>331</width>
+      <width>671</width>
       <height>171</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout"/>
    </widget>
    <widget class="QLabel" name="label_2">
     <property name="geometry">
@@ -42,12 +41,11 @@
     <property name="geometry">
      <rect>
       <x>310</x>
-      <y>370</y>
-      <width>521</width>
-      <height>210</height>
+      <y>290</y>
+      <width>461</width>
+      <height>311</height>
      </rect>
     </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_3"/>
    </widget>
    <widget class="QWidget" name="gameButtonsWidget" native="true">
     <property name="geometry">
@@ -74,7 +72,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="buttonDouble">
+      <widget class="QPushButton" name="buttonDoubleDown">
        <property name="text">
         <string>Double</string>
        </property>
@@ -135,6 +133,19 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="handValue">
+    <property name="geometry">
+     <rect>
+      <x>520</x>
+      <y>270</y>
+      <width>66</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>0</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -142,7 +153,7 @@
      <x>0</x>
      <y>0</y>
      <width>1168</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
