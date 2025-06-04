@@ -27,6 +27,9 @@ public:
     int getChipsAmount() const;
 
     QString determineOutcome();
+    bool roundOver = true;
+    bool isRoundOver() const;
+
 
     void endRound();
 

@@ -115,9 +115,16 @@ QString Game::determineOutcome() {
         chips.addChips(currentBet);
     }
 
+    roundOver = true;
+    
     chips.saveChips();
     currentBet = 0;
     return outcome;
+}
+
+
+bool Game::isRoundOver() const {
+    return roundOver;
 }
 
 
