@@ -6,7 +6,7 @@
 
 
 bool Player::doubleDown(Deck& deck, int& bet, Chips& chips) {
-    if (bet * 2 > chips.getChips()) {
+    if (bet > chips.getChips()) {
         return false;
     }
     
