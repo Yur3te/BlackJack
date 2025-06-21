@@ -2,6 +2,11 @@
 #include "ui_mainwindow.h"
 #include <QDebug>
 
+#include "HitCommand.h"
+#include "StandCommand.h"
+#include "BetCommand.h"
+#include "DoubleDownCommand.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -11,6 +16,11 @@ MainWindow::MainWindow(QWidget *parent)
     game = new Game();
     updateChipsDisplay();
     ui->textOutput->append("Gra rozpoczęta!");
+
+    hitCommand = new HitCommand(game, this);
+    standCommand = new StandCommand(game, this);
+    betCommand = new BetCommand(game, this);
+    doubleDownCommand = new DoubleDownCommand(game, this);
 
     connect(ui->buttonHit, &QPushButton::clicked, this, &MainWindow::onHitClicked);
     connect(ui->buttonStand, &QPushButton::clicked, this, &MainWindow::onStandClicked);
@@ -23,95 +33,31 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete game;
+
+    delete hitCommand;
+    delete standCommand;
+    delete betCommand;
+    delete doubleDownCommand;
 }
 
 void MainWindow::onHitClicked()
 {
-    if (game->isRoundOver()) {
-        ui->textOutput->append("You can't hit, the round is over. Please place a new bet.");
-        return;
-    }
-    Card* card = game->playerHit();
-    displayCard(card, ui->playerCardsWidget, game->getPlayer().getFirstHand().getCards().size() - 1, false);
-    displayHandValue(game->getPlayer().getFirstHand());
-    ui->textOutput->append(QString::fromStdString("Dobierasz kartę: " + card->getImageName()));
-    if (game->isPlayerBusted()) {
-        game->determineOutcome();
-        updateChipsDisplay();
-        displayRoundResult();
-    }
+    hitCommand->execute();
 }
 
 void MainWindow::onStandClicked()
 {
-    if (game->isRoundOver()) {
-        ui->textOutput->append("You can't stand, the round is over. Please place a new bet.");
-        return;
-    }
-
-   if (game->playerStand()) {
-        game->roundOver = true;
-        game->dealerPlayTurn();
-        updateHandsDisplay();
-        game->determineOutcome();
-        updateChipsDisplay();
-        displayRoundResult();
-        ui->textOutput->append("Gracz kończy turę.");
-    }
+    standCommand->execute();
 }
 
 void MainWindow::onDoubleDownClicked()
 {
-    if(game->isRoundOver()) {
-        ui->textOutput->append("You can't double down, the round is over. Please place a new bet.");
-        return;
-    }
-    if (game->getPlayer().getFirstHand().getCards().size() != 2) {
-        ui->textOutput->append("You can only double down on your first two cards.");
-        return;
-    }
-    if (game->playerDoubleDown()) {
-        game->roundOver = true;
-        game->dealerPlayTurn();
-        updateHandsDisplay();
-        displayHandValue(game->getPlayer().getFirstHand());
-        game->determineOutcome();
-        updateChipsDisplay();
-        displayRoundResult();
-        ui->textOutput->append("You doubled down and ended your turn.");
-    } else {
-        ui->textOutput->append("You can't double down at this moment.");
-    }
+    doubleDownCommand->execute();
 }
 
 void MainWindow::onBetClicked()
 {
-    if (!game->isRoundOver()) {
-        ui->textOutput->append("Game is not over yet, you can't place a bet now.");
-    } else if (game->getChipsAmount() <= 0) {
-        ui->textOutput->append("You have no chips left to place a bet.");
-        ui->enterChips->clear();
-        updateChipsDisplay();
-        return;
-    } else {
-        int bet = ui->enterChips->text().toInt();
-        if (bet > 0) {
-            game->placeBet(bet);
-            ui->textOutput->append(QString("Postawiono zakład: %1").arg(bet));
-            ui->enterChips->clear();
-            updateChipsDisplay();
-            game->roundOver = false;
-
-            game->endRound();
-            game->dealInitialCards();
-            displayHandValue(game->getPlayer().getFirstHand());
-            updateHandsDisplay();
-        // game.checkBlackjack();
-        } else {
-            ui->textOutput->append("Nieprawidłowy zakład!");
-        }
-
-    }
+    betCommand->execute();
     
 }
 
@@ -171,6 +117,8 @@ void MainWindow::updateChipsDisplay() {
     ui->chipsLabel->setText(QString("Chips: %1").arg(game->getChipsAmount()));
 }
 
+
+
 void MainWindow::displayHandValue(const Hand& hand) {
     int value = hand.getHandValue();
     ui->handValue->setText(QString("value: %1").arg(value));
@@ -180,6 +128,13 @@ void MainWindow::displayRoundResult() {
     ui->textOutput->append(game->determineOutcome());
 }
 
+void MainWindow::clearChipsInput() {
+    ui->enterChips->clear();
+}
+
+int MainWindow::getEnteredChips() const {
+    return ui->enterChips->text().toInt();
+}
 
 
 void MainWindow::updateHandsDisplay()
@@ -220,6 +175,22 @@ void MainWindow::updateHandsDisplay()
 
 }
 
+void MainWindow::appendTextOutput(const QString& text) {
+    ui->textOutput->append(text);
+}
+
+void MainWindow::showPlayerCard(Card* card) {
+    displayCard(card, ui->playerCardsWidget, game->getPlayer().getFirstHand().getCards().size() - 1, false);
+}
+
+void MainWindow::showPlayerHandValue(const Hand& hand) {
+    displayHandValue(hand);
+}
+
+void MainWindow::refreshChips() {
+    updateChipsDisplay();
+}
+
 
 
 
@@ -241,17 +212,3 @@ void MainWindow::updateHandsDisplay()
 //     }
 // }
 
-
-// void MainWindow::displayPlayerHand() {
-    // ui->textOutput->append("Twoja ręka:");
-    // for (Card* card : game->getPlayerHand()) {
-    //     displayCard(card);
-    // }
-// }
-
-// void MainWindow::displayDealerHand() {
-    // ui->textOutput->append("Ręka krupiera:");
-    // for (Card* card : game->getDealerHand()) {
-    //     displayCard(card);
-    // }
-// }

@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "Game.h"
+#include "Command.h"
+
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,6 +17,18 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    
+    void appendTextOutput(const QString& text);
+    void showPlayerCard(Card* card);
+    void showPlayerHandValue(const Hand& hand);
+    void refreshChips();
+    void displayRoundResult();
+    void updateChipsDisplay();
+    void updateHandsDisplay();
+    void displayHandValue(const Hand& hand);
+    void clearChipsInput();
+    int getEnteredChips() const;
+    
 
 private slots:
     void onHitClicked();
@@ -22,13 +36,11 @@ private slots:
     void onBetClicked();
     void onDoubleDownClicked();
 
-    
+
     void displayCard(Card* card, QWidget* targetWidget, int cardIndex, bool horizontal);
     void displayBackCard(QWidget* targetWidget, int cardIndex, bool horizontal);
-    void updateChipsDisplay();
-    void displayHandValue(const Hand& hand);
-    void updateHandsDisplay();
-    void displayRoundResult();
+
+    
     
     // void displayPlayerHand(const std::vector<Card>& cards);
     // void displayDealerHand(const std::vector<Card>& cards, bool revealAll);
@@ -37,5 +49,10 @@ private slots:
 private:
     Ui::MainWindow *ui;
     Game* game;
+    Command* standCommand;
+    Command* betCommand;
+    Command* doubleDownCommand;
+    Command* hitCommand;
+    
 };
 #endif // MAINWINDOW_H

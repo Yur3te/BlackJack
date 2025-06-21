@@ -15,6 +15,10 @@ SOURCES += \
     ../src/Hand.cpp \
     ../src/Person.cpp \
     ../src/Player.cpp \
+    ../src/HitCommand.cpp\
+    ../src/StandCommand.cpp\
+    ../src/DoubleDownCommand.cpp\
+    ../src/BetCommand.cpp\
     mainwindow.cpp
 
 HEADERS += \
@@ -26,6 +30,10 @@ HEADERS += \
     ../include/Hand.h \
     ../include/Person.h \
     ../include/Player.h \
+    ../include/HitCommand.h \
+    ../src/StandCommand.h\
+    ../src/DoubleDownCommand.h\
+    ../src/BetCommand.h\
     mainwindow.h
 
 
