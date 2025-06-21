@@ -28,44 +28,52 @@ void Game::dealInitialCards() {
     dealer.addCard(deck.deal());
 }
 
-// void Game::checkBlackjack() {
-//     if (player.getHandValue() == 21 || dealer.getHandValue() == 21) {
-//         if (player.getHandValue() == 21 && dealer.getHandValue() == 21) {
-//             cout << "Push! Both have blackjack!" << endl;
-//         } else if (player.getHandValue() == 21) {
-//             cout << "Blackjack! You win 1.5x your currentBet!" << endl;
-//             currentBet = static_cast<int>(currentBet * 1.25);
-//             // 2.5x, on bj,  it goes now 1.5x then 2x, so 3x not 2.5x, ig 1.25 works XDD
-//         } else {
-//             cout << "Dealer has blackjack! You lose!" << endl;
-//         }
-//     }
-// }
+QString Game::checkBlackjack() {
+    bool playerBJ = player.getHandValue() == 21 && player.getFirstHand().getCards().size() == 2;
+    bool dealerBJ = dealer.getHandValue() == 21 && dealer.getFirstHand().getCards().size() == 2;
 
-bool Game::playerTurn() {
-    int i = 0;
-    while (i < player.hands.size()) { 
-        player.currentHandIndex = i;
+    if (playerBJ || dealerBJ) {
+        roundOver = true;
 
-        if(player.hands.size() > 1){
-            cout << "Hand #" << (i + 1) << ":" << endl;
-            player.getCurrentHand().printHand();
-            cout << "Hand value: " << player.getCurrentHand().getHandValue() << endl;
+        if (playerBJ && dealerBJ) {
+            return "RPush! Both you and the dealer have Blackjack.";
+        } else if (playerBJ) {
+            int winnings = static_cast<int>(currentBet * 1.5);
+            chips.addChips(winnings + currentBet);  // zwrot zakładu + wygrana
+            return QString("Blackjack! You won %1 chips!").arg(winnings);
+        } else {
+            return "Dealer has Blackjack!";
         }
-        player.playTurn(deck, currentBet, chips); 
-
-        cout << "Final state of Hand #" << (i + 1) << ":" << endl;
-        player.getCurrentHand().printHand();
-        cout << "Hand value: " << player.getCurrentHand().getHandValue() << endl;
-
-        if (player.getCurrentHand().isBusted()) {
-            cout << "Hand #" << (i + 1) << " busted!" << endl;
-        }
-
-        i++; 
     }
-    return true;
+
+    return "";
 }
+
+
+// bool Game::playerTurn() {
+//     int i = 0;
+//     while (i < player.hands.size()) { 
+//         player.currentHandIndex = i;
+
+//         if(player.hands.size() > 1){
+//             cout << "Hand #" << (i + 1) << ":" << endl;
+//             player.getCurrentHand().printHand();
+//             cout << "Hand value: " << player.getCurrentHand().getHandValue() << endl;
+//         }
+//         player.playTurn(deck, currentBet, chips); 
+
+//         cout << "Final state of Hand #" << (i + 1) << ":" << endl;
+//         player.getCurrentHand().printHand();
+//         cout << "Hand value: " << player.getCurrentHand().getHandValue() << endl;
+
+//         if (player.getCurrentHand().isBusted()) {
+//             cout << "Hand #" << (i + 1) << " busted!" << endl;
+//         }
+
+//         i++; 
+//     }
+//     return true;
+// }
 
 void Game::dealerTurn() {
     dealer.playTurn(deck);

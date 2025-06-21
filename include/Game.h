@@ -30,6 +30,8 @@ public:
     bool roundOver = true;
     bool isRoundOver() const;
 
+    QString checkBlackjack();
+
 
     void endRound();
 
@@ -41,7 +43,6 @@ private:
     Dealer dealer;
     Chips chips;
     int currentBet;
-    void checkBlackjack();
     bool playerTurn();
     void dealerTurn();
     void determineWinner();
