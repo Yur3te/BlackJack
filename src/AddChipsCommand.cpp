@@ -11,7 +11,7 @@ void AddChipsCommand::execute() {
     if (game->isRoundOver()) {
         int chipsToAdd = window->getEnteredChipsToAdd();
         if(game->getChipsAmount() > 0) {
-            window->appendTextOutput("Why you give up? You have chips in your balance, don't lose hope!");
+            window->appendTextOutput("Why do you give up? You have chips in your balance, don't lose hope!");
             return;
         }
         if (chipsToAdd > 0) {
