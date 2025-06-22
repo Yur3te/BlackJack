@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
 {
     
     ui->setupUi(this);
+    setWindowTitle("BlackJack 🃏");
     game = new Game();
     updateChipsDisplay();
     ui->textOutput->append("Game started!");
