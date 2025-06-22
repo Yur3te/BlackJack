@@ -23,9 +23,6 @@ class Person {
         const std::vector<Card*>& getCards() const;
 
         vector<Hand> hands;
-        // TODO: Refactor hands to be private and add proper access methods
-    // private:
-    //     vector<Hand> hands;
 };
 
 

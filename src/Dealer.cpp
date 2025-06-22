@@ -10,8 +10,3 @@ void Dealer::playTurn(Deck& deck) {
     }
 
 }
-
-void Dealer::printFirstCard() const {
-    cout << "Dealer's first card is: " << endl;
-    getFirstHand().printCard(0);
-}

@@ -19,6 +19,6 @@ void StandCommand::execute() {
         game->determineOutcome();
         window->updateChipsDisplay();
         window->displayRoundResult();
-        window->appendTextOutput("Gracz kończy turę.");
+        window->appendTextOutput("Player stands, dealer's turn now.");
     }
 }

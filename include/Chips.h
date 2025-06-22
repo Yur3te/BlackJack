@@ -13,7 +13,6 @@ class Chips {
         void addChips(int amount);
         void removeChips(int amount);
         int getChips() const;
-        void printChips() const;
         void saveChips() const;
         void loadChips();
     private:

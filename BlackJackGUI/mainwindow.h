@@ -34,15 +34,8 @@ public:
 
 private slots:
     void onCommandClicked(Command* command);
-
     void displayCard(Card* card, QWidget* targetWidget, int cardIndex, bool horizontal);
     void displayBackCard(QWidget* targetWidget, int cardIndex, bool horizontal);
-
-    
-    
-    // void displayPlayerHand(const std::vector<Card>& cards);
-    // void displayDealerHand(const std::vector<Card>& cards, bool revealAll);
-
 
 private:
     Ui::MainWindow *ui;

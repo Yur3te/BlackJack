@@ -17,40 +17,27 @@
    <widget class="QWidget" name="dealerCardsWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>70</y>
+      <x>340</x>
+      <y>90</y>
       <width>671</width>
       <height>171</height>
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>40</y>
-      <width>49</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Dealer</string>
-    </property>
-   </widget>
    <widget class="QWidget" name="playerCardsWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>310</x>
-      <y>290</y>
-      <width>461</width>
-      <height>311</height>
+      <x>470</x>
+      <y>340</y>
+      <width>161</width>
+      <height>241</height>
      </rect>
     </property>
    </widget>
    <widget class="QWidget" name="gameButtonsWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>400</x>
+      <x>390</x>
       <y>610</y>
       <width>321</width>
       <height>42</height>
@@ -136,23 +123,10 @@
    <widget class="QLabel" name="playerHandValue">
     <property name="geometry">
      <rect>
-      <x>520</x>
-      <y>270</y>
+      <x>510</x>
+      <y>310</y>
       <width>66</width>
       <height>18</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
-   <widget class="QLabel" name="dealerHandValue">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>40</y>
-      <width>49</width>
-      <height>16</height>
      </rect>
     </property>
     <property name="text">
@@ -183,6 +157,32 @@
       <widget class="QPushButton" name="buttonAddChips">
        <property name="text">
         <string>Add!</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="widget_2" native="true">
+    <property name="geometry">
+     <rect>
+      <x>420</x>
+      <y>40</y>
+      <width>121</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label_2">
+       <property name="text">
+        <string>Dealer</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="dealerHandValue">
+       <property name="text">
+        <string/>
        </property>
       </widget>
      </item>

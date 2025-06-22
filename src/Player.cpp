@@ -10,8 +10,8 @@ bool Player::doubleDown(Deck& deck, int& bet, Chips& chips) {
         return false;
     }
     
-    chips.removeChips(bet); // Deduct the extra bet amount
-    bet *= 2; // Double the bet
+    chips.removeChips(bet);
+    bet *= 2;
     Card* newCard = deck.deal();
     addCard(newCard);
     return true;
@@ -27,22 +27,14 @@ bool Player::stand() {
     return true;
 }
 
-// bool Player::stand() {
-//     return true;
-// }
-
-
 
 bool Player::split(Deck& deck, int& bet, Chips& chips) {
     if(!getCurrentHand().canSplit()) {
-        cout << "You can't split this hand silly, you need two cards with the same value ;>" << endl;
         return false;
     }
-    if(bet *2 > chips.getChips()){
-        cout << "Not enough chips to split!" << endl;
+    if(bet > chips.getChips()){
         return false;
     }
-    cout<<"You chose to split!"<<endl;
     chips.removeChips(bet);
 
 
@@ -54,13 +46,7 @@ bool Player::split(Deck& deck, int& bet, Chips& chips) {
     hands[currentHandIndex].addCard(deck.deal());
     newHand.addCard(deck.deal());
 
-    
-    cout << "Adding new hand..." << endl;
     hands.push_back(newHand);
-
-
-    printHand();
-    cout << "Hand value: " << getHandValue() << endl;
 
     return true;
 }

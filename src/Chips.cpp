@@ -24,10 +24,6 @@ int Chips::getChips() const {
     return chips;
 }
 
-void Chips::printChips() const {
-    std::cout << "Chips: " << chips << std::endl;
-}
-
 void Chips::saveChips() const {
     QString path = QCoreApplication::applicationDirPath() + "/chips.txt";
     ofstream file(path.toStdString());

@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     game = new Game();
     updateChipsDisplay();
-    ui->textOutput->append("Gra rozpoczęta!");
+    ui->textOutput->append("Game started!");
 
     hitCommand = new HitCommand(game, this);
     standCommand = new StandCommand(game, this);
@@ -29,8 +29,6 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->buttonBet, &QPushButton::clicked, [=]() { onCommandClicked(betCommand); });
     connect(ui->buttonDoubleDown, &QPushButton::clicked, [=]() { onCommandClicked(doubleDownCommand); });
     connect(ui->buttonAddChips, &QPushButton::clicked, [=]() { onCommandClicked(addChipsCommand); });
-
-
 }
 
 MainWindow::~MainWindow()
@@ -56,12 +54,8 @@ void MainWindow::displayCard(Card* card, QWidget* targetWidget, int cardIndex, b
     QPixmap pixmap(imagePath);
 
     if (pixmap.isNull()) {
-        qDebug() << "Błąd ładowania obrazu z:" << imagePath;
+        qDebug() << "Error while loading: " << imagePath;
     } else {
-        // QLabel* cardLabel = new QLabel(this);
-        // cardLabel->setPixmap(pixmap.scaled(100, 140)); 
-        // targetLayout->addWidget(cardLabel);
-
         QLabel* cardLabel = new QLabel(targetWidget);
         cardLabel->setPixmap(pixmap.scaled(100, 140));
         cardLabel->setScaledContents(true);
@@ -71,9 +65,6 @@ void MainWindow::displayCard(Card* card, QWidget* targetWidget, int cardIndex, b
         int yOffset = horizontal ? 0 : cardIndex * 30;
         cardLabel->move(xOffset, yOffset);
         cardLabel->show();
-
-
-
     }
 }
 
@@ -82,12 +73,8 @@ void MainWindow::displayBackCard(QWidget* targetWidget, int cardIndex, bool hori
     QPixmap pixmap(imagePath);
 
     if (pixmap.isNull()) {
-        qDebug() << "Błąd ładowania obrazu z:" << imagePath;
+        qDebug() << "Error while loading: " << imagePath;
     } else {
-        // QLabel* cardLabel = new QLabel(this);
-        // cardLabel->setPixmap(pixmap.scaled(100, 140)); 
-        // targetLayout->addWidget(cardLabel);
-
         QLabel* cardLabel = new QLabel(targetWidget);
         cardLabel->setPixmap(pixmap.scaled(100, 140));
         cardLabel->setScaledContents(true);
@@ -97,8 +84,6 @@ void MainWindow::displayBackCard(QWidget* targetWidget, int cardIndex, bool hori
         int yOffset = horizontal ? 0 : cardIndex * 30;
         cardLabel->move(xOffset, yOffset);
         cardLabel->show();
-
-
     }
 }
 
@@ -146,7 +131,6 @@ int MainWindow::getEnteredChipsToAdd() const {
 
 void MainWindow::updateHandsDisplay()
 {
-    // Czyść stare karty
     for (QObject* obj : ui->playerCardsWidget->children()) {
         QLabel* label = qobject_cast<QLabel*>(obj);
         if (label) delete label;
@@ -158,14 +142,12 @@ void MainWindow::updateHandsDisplay()
     }
 
 
-    // Wyświetl nowe karty
     const Hand& playerHand = game->getPlayer().getFirstHand();
     int i = 0;
     for (Card* card : playerHand.getCards()) {
         displayCard(card, ui->playerCardsWidget, i++, false);
     }
 
-    // Dealer – jeśli gra trwa, pokaż 1. kartę + zakrytą
     const Hand& dealerHand = game->getDealer().getFirstHand();
     if (!game->isRoundOver()) {
         if (!dealerHand.getCards().empty()) {
@@ -193,25 +175,3 @@ void MainWindow::showPlayerCard(Card* card) {
 void MainWindow::refreshChips() {
     updateChipsDisplay();
 }
-
-
-
-
-// void MainWindow::displayHands() {
-//     ui->handsLayout->clear(); // Wyczyść poprzednią zawartość
-
-//     for (int i = 0; i < game->player.getHandsCount(); ++i) {
-//         // Stwórz kontener na rękę
-//         QGroupBox* handGroup = new QGroupBox(QString("Ręka %1").arg(i + 1), this);
-//         QVBoxLayout* handLayout = new QVBoxLayout(handGroup);
-
-//         // Pokaż karty w tej ręce
-//         Hand& hand = game->player.getHand(i);
-//         for (Card* card : hand.getCards()) {
-//             displayCard(card);  // Wyświetl kartę (metoda jak wcześniej)
-//         }
-
-//         ui->handsLayout->addWidget(handGroup);  // Dodaj rękę do głównego layoutu
-//     }
-// }
-

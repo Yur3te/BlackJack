@@ -21,6 +21,7 @@ void DoubleDownCommand::execute() {
         game->dealerPlayTurn();
         window->updateHandsDisplay();
         window->displayHandValue(game->getPlayer().getFirstHand(), "playerHandValue");
+        window->displayHandValue(game->getDealer().getFirstHand(), "dealerHandValue");
         game->determineOutcome();
         window->updateChipsDisplay();
         window->displayRoundResult();

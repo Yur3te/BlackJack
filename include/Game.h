@@ -46,9 +46,6 @@ private:
     int currentBet;
     bool playerTurn();
     void dealerTurn();
-    void determineWinner();
-
-    // void playRound();
 };
 
 #endif // GAME_H

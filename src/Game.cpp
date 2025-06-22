@@ -12,8 +12,6 @@ Game::Game() {
 }
     
 void Game::endRound() {
-    // chips.saveChips();
-    // chips.printChips();
     deck.reset();
     deck.shuffle();
     player.clearHand();
@@ -39,7 +37,7 @@ QString Game::checkBlackjack() {
             return "RPush! Both you and the dealer have Blackjack.";
         } else if (playerBJ) {
             int winnings = static_cast<int>(currentBet * 1.5);
-            chips.addChips(winnings + currentBet);  // zwrot zakładu + wygrana
+            chips.addChips(winnings + currentBet);
             return QString("Blackjack! You won %1 chips!").arg(winnings);
         } else {
             return "Dealer has Blackjack!";
@@ -50,53 +48,8 @@ QString Game::checkBlackjack() {
 }
 
 
-// bool Game::playerTurn() {
-//     int i = 0;
-//     while (i < player.hands.size()) { 
-//         player.currentHandIndex = i;
-
-//         if(player.hands.size() > 1){
-//             cout << "Hand #" << (i + 1) << ":" << endl;
-//             player.getCurrentHand().printHand();
-//             cout << "Hand value: " << player.getCurrentHand().getHandValue() << endl;
-//         }
-//         player.playTurn(deck, currentBet, chips); 
-
-//         cout << "Final state of Hand #" << (i + 1) << ":" << endl;
-//         player.getCurrentHand().printHand();
-//         cout << "Hand value: " << player.getCurrentHand().getHandValue() << endl;
-
-//         if (player.getCurrentHand().isBusted()) {
-//             cout << "Hand #" << (i + 1) << " busted!" << endl;
-//         }
-
-//         i++; 
-//     }
-//     return true;
-// }
-
 void Game::dealerTurn() {
     dealer.playTurn(deck);
-}
-
-void Game::determineWinner() {
-    int dealerScore = dealer.getHandValue();
-
-    for (int i = 0; i < player.hands.size(); i++) {
-        int playerScore = player.hands[i].getHandValue();
-        cout << "Result for Hand #" << (i + 1) << ":" << endl;
-        if (playerScore > 21) {
-            // chips.removeChips(currentBet);
-        } else if (dealerScore > 21 || playerScore > dealerScore) {
-            cout << "You win! You won " << currentBet*2 << " chips." << endl;
-            chips.addChips(currentBet*2);
-        } else if (playerScore == dealerScore) {
-            cout << "Push!" << endl;
-            chips.addChips(currentBet);
-        } else {
-            cout << "Dealer wins! You lost " << currentBet << " chips." << endl;
-        }
-    }
 }
 
 QString Game::determineOutcome() {
