@@ -176,3 +176,7 @@ void Game::placeBet(int bet) {
 int Game::getChipsAmount() const {
     return chips.getChips();
 }
+
+void Game::addChips(int amount) {
+    chips.addChips(amount);
+}

@@ -19,6 +19,7 @@ SOURCES += \
     ../src/StandCommand.cpp\
     ../src/DoubleDownCommand.cpp\
     ../src/BetCommand.cpp\
+    ../src/AddChipsCommand.cpp\
     mainwindow.cpp
 
 HEADERS += \
@@ -34,6 +35,7 @@ HEADERS += \
     ../src/StandCommand.h\
     ../src/DoubleDownCommand.h\
     ../src/BetCommand.h\
+    ../src/AddChipsCommand.h\
     mainwindow.h
 
 

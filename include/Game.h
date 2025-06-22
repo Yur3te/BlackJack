@@ -25,6 +25,7 @@ public:
     void placeBet(int bet);
     void dealInitialCards();
     int getChipsAmount() const;
+    void addChips(int amount);
 
     QString determineOutcome();
     bool roundOver = true;

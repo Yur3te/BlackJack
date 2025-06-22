@@ -90,8 +90,8 @@
    <widget class="QWidget" name="betLayout" native="true">
     <property name="geometry">
      <rect>
-      <x>880</x>
-      <y>510</y>
+      <x>890</x>
+      <y>350</y>
       <width>109</width>
       <height>116</height>
      </rect>
@@ -133,7 +133,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="handValue">
+   <widget class="QLabel" name="playerHandValue">
     <property name="geometry">
      <rect>
       <x>520</x>
@@ -143,8 +143,50 @@
      </rect>
     </property>
     <property name="text">
-     <string>0</string>
+     <string/>
     </property>
+   </widget>
+   <widget class="QLabel" name="dealerHandValue">
+    <property name="geometry">
+     <rect>
+      <x>550</x>
+      <y>40</y>
+      <width>49</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QWidget" name="widget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>1010</x>
+      <y>620</y>
+      <width>121</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="QLabel" name="label_3">
+       <property name="text">
+        <string>Add More Chips!</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="enteredChipsToAdd"/>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonAddChips">
+       <property name="text">
+        <string>Add!</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -153,7 +195,7 @@
      <x>0</x>
      <y>0</y>
      <width>1168</width>
-     <height>23</height>
+     <height>21</height>
     </rect>
    </property>
   </widget>

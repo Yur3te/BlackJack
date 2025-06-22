@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
 #include "Game.h"
 #include "Command.h"
 
@@ -20,22 +21,19 @@ public:
     
     void appendTextOutput(const QString& text);
     void showPlayerCard(Card* card);
-    void showPlayerHandValue(const Hand& hand);
     void refreshChips();
     void displayRoundResult();
     void updateChipsDisplay();
     void updateHandsDisplay();
-    void displayHandValue(const Hand& hand);
+    void displayHandValue(const Hand& hand, const QString& labelName);
+    void clearLabel(const QString& labelName);
     void clearChipsInput();
     int getEnteredChips() const;
+    int getEnteredChipsToAdd() const;
     
 
 private slots:
-    void onHitClicked();
-    void onStandClicked();
-    void onBetClicked();
-    void onDoubleDownClicked();
-
+    void onCommandClicked(Command* command);
 
     void displayCard(Card* card, QWidget* targetWidget, int cardIndex, bool horizontal);
     void displayBackCard(QWidget* targetWidget, int cardIndex, bool horizontal);
@@ -53,6 +51,7 @@ private:
     Command* betCommand;
     Command* doubleDownCommand;
     Command* hitCommand;
+    Command* addChipsCommand;
     
 };
 #endif // MAINWINDOW_H

@@ -33,7 +33,8 @@ void BetCommand::execute() {
 
             game->endRound();
             game->dealInitialCards();
-            window->displayHandValue(game->getPlayer().getFirstHand());
+            window->clearLabel("dealerHandValue");
+            window->displayHandValue(game->getPlayer().getFirstHand(), "playerHandValue");
             window->updateHandsDisplay();
             QString bjMessage = game->checkBlackjack();
             if (!bjMessage.isEmpty()) {

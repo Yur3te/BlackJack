@@ -6,6 +6,7 @@
 #include "StandCommand.h"
 #include "BetCommand.h"
 #include "DoubleDownCommand.h"
+#include "AddChipsCommand.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -21,11 +22,14 @@ MainWindow::MainWindow(QWidget *parent)
     standCommand = new StandCommand(game, this);
     betCommand = new BetCommand(game, this);
     doubleDownCommand = new DoubleDownCommand(game, this);
+    addChipsCommand = new AddChipsCommand(game, this);
 
-    connect(ui->buttonHit, &QPushButton::clicked, this, &MainWindow::onHitClicked);
-    connect(ui->buttonStand, &QPushButton::clicked, this, &MainWindow::onStandClicked);
-    connect(ui->buttonBet, &QPushButton::clicked, this, &MainWindow::onBetClicked);
-    connect(ui->buttonDoubleDown, &QPushButton::clicked, this, &MainWindow::onDoubleDownClicked);
+    connect(ui->buttonHit, &QPushButton::clicked,  [=]() { onCommandClicked(hitCommand); });
+    connect(ui->buttonStand, &QPushButton::clicked, [=]() { onCommandClicked(standCommand); });
+    connect(ui->buttonBet, &QPushButton::clicked, [=]() { onCommandClicked(betCommand); });
+    connect(ui->buttonDoubleDown, &QPushButton::clicked, [=]() { onCommandClicked(doubleDownCommand); });
+    connect(ui->buttonAddChips, &QPushButton::clicked, [=]() { onCommandClicked(addChipsCommand); });
+
 
 }
 
@@ -38,28 +42,14 @@ MainWindow::~MainWindow()
     delete standCommand;
     delete betCommand;
     delete doubleDownCommand;
+    delete addChipsCommand;
 }
 
-void MainWindow::onHitClicked()
+void MainWindow::onCommandClicked(Command* command)
 {
-    hitCommand->execute();
+    command->execute();
 }
 
-void MainWindow::onStandClicked()
-{
-    standCommand->execute();
-}
-
-void MainWindow::onDoubleDownClicked()
-{
-    doubleDownCommand->execute();
-}
-
-void MainWindow::onBetClicked()
-{
-    betCommand->execute();
-    
-}
 
 void MainWindow::displayCard(Card* card, QWidget* targetWidget, int cardIndex, bool horizontal) {
     QString imagePath = QCoreApplication::applicationDirPath() + "/assets/cards/" + QString::fromStdString(card->getImageName());
@@ -119,9 +109,23 @@ void MainWindow::updateChipsDisplay() {
 
 
 
-void MainWindow::displayHandValue(const Hand& hand) {
+void MainWindow::displayHandValue(const Hand& hand, const QString& handName) {
+    QLabel* handLabel = findChild<QLabel*>(handName);
+    if (!handLabel) {
+        qDebug() << "Can't find label!" << handName;
+        return;
+    }
     int value = hand.getHandValue();
-    ui->handValue->setText(QString("value: %1").arg(value));
+    handLabel->setText(QString("value: %1").arg(value));
+}
+
+void MainWindow::clearLabel(const QString& labelName) {
+    QLabel* label = findChild<QLabel*>(labelName);
+    if (label) {
+        label->clear();
+    } else {
+        qDebug() << "Can't find label!" << labelName;
+    }
 }
 
 void MainWindow::displayRoundResult() {
@@ -136,6 +140,9 @@ int MainWindow::getEnteredChips() const {
     return ui->enterChips->text().toInt();
 }
 
+int MainWindow::getEnteredChipsToAdd() const {
+    return ui->enteredChipsToAdd->text().toInt();
+}
 
 void MainWindow::updateHandsDisplay()
 {
@@ -181,10 +188,6 @@ void MainWindow::appendTextOutput(const QString& text) {
 
 void MainWindow::showPlayerCard(Card* card) {
     displayCard(card, ui->playerCardsWidget, game->getPlayer().getFirstHand().getCards().size() - 1, false);
-}
-
-void MainWindow::showPlayerHandValue(const Hand& hand) {
-    displayHandValue(hand);
 }
 
 void MainWindow::refreshChips() {

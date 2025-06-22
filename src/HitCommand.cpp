@@ -14,11 +14,14 @@ void HitCommand::execute() {
     }
     Card* card = game->playerHit();
     window->showPlayerCard(card);
-    window->showPlayerHandValue(game->getPlayer().getFirstHand());
+    // window->showPlayerHandValue(game->getPlayer().getFirstHand());
+    window->displayHandValue(game->getPlayer().getFirstHand(), "playerHandValue");
     window->appendTextOutput(QString::fromStdString("Dobierasz kartę: " + card->getImageName()));
     if (game->isPlayerBusted()) {
         game->determineOutcome();
         window->refreshChips();
         window->displayRoundResult();
+        window->displayHandValue(game->getDealer().getFirstHand(), "dealerHandValue");
+        window->updateHandsDisplay();
     }
 }

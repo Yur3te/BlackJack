@@ -20,7 +20,7 @@ void DoubleDownCommand::execute() {
         game->roundOver = true;
         game->dealerPlayTurn();
         window->updateHandsDisplay();
-        window->displayHandValue(game->getPlayer().getFirstHand());
+        window->displayHandValue(game->getPlayer().getFirstHand(), "playerHandValue");
         game->determineOutcome();
         window->updateChipsDisplay();
         window->displayRoundResult();
